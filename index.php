@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Chat</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-</head>
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1>Simple chat</h1>
+<?php
+	session_start();
+	include("header.php");
+	include("inc/config.php");
+	error_reporting(E_ALL);
+?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Welcome to Simple chat</h1>
+			<div class="links">
+				<a href="<?php echo 'sign-in'; ?>">Sign in</a> / <a href="<?php echo 'sign-up'; ?>">Sign up</a>
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</div>
+
+
+<?php
+	include("footer.php");
+?>
