@@ -3,12 +3,10 @@
 /**
 * Routers
 */
-class Routers
-{
+class Routers {
 	
-	function __construct(argument)
-	{
-		# code...
+	public function getUrl() {
+		include($_SERVER['DOCUMENT_ROOT']."/views/sign-up.php");
 	}
 }
 

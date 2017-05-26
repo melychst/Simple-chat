@@ -1,21 +1,20 @@
 <?php
 	session_start();
 	include("header.php");
-	include("inc/config.php");
 	error_reporting(E_ALL);
-?>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<h1>Welcome to Simple chat</h1>
-			<div class="links">
-				<a href="<?php echo 'sign-in'; ?>">Sign in</a> / <a href="<?php echo 'sign-up'; ?>">Sign up</a>
-			</div>
-		</div>
-	</div>
-</div>
+	include 'inc/config.php';
+
+	require_once("class/Routers.php");
+
+echo "<pre>";
+	print_r($_SERVER);
+echo "</pre>";
+
+$route = new Routers();
+
+$route->getUrl();
 
 
-<?php
+
 	include("footer.php");
 ?>
