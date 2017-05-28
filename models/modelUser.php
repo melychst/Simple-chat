@@ -11,15 +11,13 @@ class ModelUser{
 	}
 
 	public function getUser($name){
-		$sql = "SELECT name, pass FROM users WHERE name = '$name'";
+		$sql = "SELECT id, name, pass FROM users WHERE name = '$name'";
 		$res = mysql_query($sql) or error_reporting();
 		$user = mysql_fetch_assoc($res);
 
 		if ( $user ) {
 			return $user;
 		}
-
-		echo "User not found";
 	}	
 }
 

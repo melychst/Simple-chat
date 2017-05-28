@@ -13,6 +13,7 @@ class User {
 	public $modelUser;
 
 	function __construct($userData) {
+
 		$this->name = $userData['name'];
 		$this->pass = $userData['pass'];
 
@@ -40,8 +41,16 @@ class User {
 
 	public function userLogin() {
 		$user = $this->modelUser->getUser($this->name);
+		
+		if ( !is_array($user) ) {
+			echo "User name or login is wrong";
+			return;
+		}
+		
+		$_SESSION['user_name'] = $user['name'];
+		$_SESSION['user_id'] = $user['id'];
 
-		print_r( $user );
+		header("Location: /chat");
 	}
 
 	public function userRigister() {

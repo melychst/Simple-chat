@@ -1,5 +1,5 @@
 <?php
-	print_r($_POST);
+	//print_r($_POST);
 ?>
 <div class="container">
 	<div class="row">
@@ -13,7 +13,7 @@
 			    </div>
 			  </div>
 			  <div class="control-group">
-			    <label class="control-label" for="pass">Email</label>
+			    <label class="control-label" for="pass">Password</label>
 			    <div class="controls">
 			      <input type="password" id="pass" placeholder="" name="pass" required>
 			    </div>
