@@ -6,53 +6,52 @@
 class Validation{
 
 	public $errors = array();
-	public $min = 8;
+	public $register;
 
-	function emptyField($value, $key, $type = ''){
+	function __construct($name, $email, $pass, $pass_conf){
+/*
+		echo $name."<br>";
+		echo $email."<br>";
+		echo $pass."<br>";
+		echo $pass_conf."<br>";
+*/		
+		$this->emptyField($name);
+		$this->emptyField($email);
+		$this->emptyField($pass);
+		$this->emptyField($pass_conf);
 
-		if ($type != 'password') {
-			$value = strip_tags(trim($value));
+		$this->maskEmail($email);
+
+		$this->passValid($pass, $pass_conf);
+
+		if ( count($this->errors) > 0 ) {
+			return $this->errors;
 		}
 		
+		$this->register = 'true';
+
+		return $this->register;
+	}
+
+	public function emptyField( $value ){
 		if ($value == '') {
-			array_push($this->errors, "Field ".$key." not must be empty");
+			$this->errors['empty'] = "Не всі поля заповнені";
+			//array_push($this->errors, );
 		}
-		return $value;
-		
 	}
 
-	function minLength($value, $key){
-		
-		if ( strlen($value) <  $this->min ) {
-			array_push($this->errors, "Min length ".$key." field must be 8 chars");
-		}
-		return $value;
-	}
-
-	function maskEmail($value, $key){
+	public function maskEmail($value){
 		if ( preg_match("/^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/",$value) != 1 ) {
-			array_push($this->errors, "This is not email ".$key);			
+			$this->errors['email'] = "Не коректний email";
+			//array_push($this->errors, );			
 		}
-		return $value; 
 	}
 
-	function passValid($pass, $key, $pass_corect){
-		if ($pass != $pass_corect) {
-			array_push($this->errors, "Паролі не співпадають");
-			$_SESSION['pass_corect'] = '';
+	public function passValid($pass, $pass_conf){
+		if ($pass != $pass_conf) {
+			$this->errors['password'] =  "Паролі не співпадають";
+			//array_push($this->errors, "Паролі не співпадають");
 		}
-		return $pass;
-	}
-
-	function maskPass($value, $key){
-		if ( preg_match("/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/", $value) != 1 )  {
-				array_push($this->errors, "Пароль надто простий ".$key);
-		}
-		return $value;
-	}
-
-	function cashPass($value){
-		return password_hash($password, PASSWORD_DEFAULT);
 	}
 }
 

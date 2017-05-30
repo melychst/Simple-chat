@@ -1,0 +1,20 @@
+header {
+	padding: 50px 0px;
+	.left-col {
+		font-size: 20px;
+	}
+}
+.main-chat {
+	#table {
+		width: 100%;
+		margin-bottom: 50px;
+		thead {
+			font-size: 16px;
+			text-align: center;
+			font-weight: bold;
+		}
+		tr {
+			min-height: 35px;
+		}
+	}
+}

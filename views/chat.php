@@ -5,7 +5,7 @@
 			<div class="col-md-12">
 				<h1>Messages</h1>
 				<div id="chat-messages">
-					<table>
+					<table id="table" data-count="25">
 						<thead>
 							<tr>
 								<td>Author</td>
@@ -17,16 +17,12 @@
 							<?php
 								if ( is_array($chatMessages) ) {
 									foreach ($chatMessages as $key => $message) {
-									
 							?>
-							
 							<tr>
 								<td><?php echo $message['name'] ?></td>
 								<td><?php echo$message['message'] ?></td>
 								<td><?php echo$message['date_add'] ?></td>
 							</tr>
-
-
 							<?php
 									}
 								}
@@ -35,6 +31,7 @@
 						</tbody>
 					</table>
 				</div>
+				<button id="download_msg">Ще</button>
 			</div>
 		</div>
 	</div>
@@ -67,10 +64,10 @@
 <div id="content"></div>
 <script type="text/javascript" charset="utf-8">
     
-    function WaitForMsg()
-    {
+    function WaitForMsg()  {
+
         $.ajax({
-       
+      
             type: 'POST',
             url: '/chatajax',
             async: true,
@@ -78,7 +75,7 @@
             success: function(response){
 
             		var messages = $.parseJSON(response);
-					var table = "<table><thead><tr><td>Author</td><td>Message</td><td>Date, time</td></tr></thead><tbody>";
+					var table = "<table id='table' data-count='"+messages.length+"'><thead><tr><td>Author</td><td>Message</td><td>Date, time</td></tr></thead><tbody>";
 
 					var i = 0;
 
@@ -96,8 +93,6 @@
             
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 
-                // alert("Error: " + textStatus + "(" + errorThrown +")");
-                
                 setTimeout('WaitForMsg()',1000);
             }
             
@@ -107,6 +102,12 @@
     $(document).ready(function(){
         
         WaitForMsg();
+
+    $(function(){
+    	$("#download_msg").click(function(){
+    		$("#table").attr("data-count", "ssss");
+    	});
+    })    
         
     });
  

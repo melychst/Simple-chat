@@ -1,3 +1,25 @@
+<?php
+	if( isset($user->register) ){
+?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<ul>
+				<?php 
+				foreach ($user->register as $key => $value) {
+					echo "<li>".$value."</li>";
+				}
+				?>
+			</ul>	
+		</div>
+	</div>
+</div>
+
+<?php				
+	}
+
+?>
 
 <div class="container">
 	<div class="row">
@@ -7,25 +29,25 @@
 			  <div class="control-group">
 			    <label class="control-label" for="name">Name</label>
 			    <div class="controls">
-			      <input type="text" id="name" placeholder="name" name="name" required>
+			      <input type="text" id="name" placeholder="name" name="name">
 			    </div>
 			  </div>
 			  <div class="control-group">
 			    <label class="control-label" for="email">Email</label>
 			    <div class="controls">
-			      <input type="email" id="email" placeholder="email" name="email" required>
+			      <input type="email" id="email" placeholder="email" name="email">
 			    </div>
 			  </div>
 			  <div class="control-group">
 			    <label class="control-label" for="pass">Password</label>
 			    <div class="controls">
-			      <input type="password" id="pass" placeholder="" name="pass" required>
+			      <input type="password" id="pass" placeholder="" name="pass">
 			    </div>
 			  </div>
 			  <div class="control-group">
 			    <label class="control-label" for="pass">Confirm Password</label>
 			    <div class="controls">
-			      <input type="password" id="pass_conf" placeholder="" name="pass_conf" required>
+			      <input type="password" id="pass_conf" placeholder="" name="pass_conf">
 			    </div>
 			  </div>
 			  <div class="control-group">

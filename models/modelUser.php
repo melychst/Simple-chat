@@ -3,11 +3,12 @@
 * 
 */
 class ModelUser{
+	public $userId;
 	public function insertUser($name, $email, $pass){
 		$sql = "INSERT INTO users (name, email, pass) VALUE ('$name', '$email', '$pass')";
 		mysql_query($sql) or die();
-		$message = "User was register";
-		return $message;
+		$this->userId = mysql_insert_id();
+
 	}
 
 	public function getUser($name){
@@ -18,7 +19,8 @@ class ModelUser{
 		if ( $user ) {
 			return $user;
 		}
-	}	
+	}
+		
 }
 
 ?>

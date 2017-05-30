@@ -3,12 +3,13 @@
 /**
 * ModelChat
 */
+
 class ModelChat {
 	public $messages = array();
 
-	public function getMessages() {
-
-		$sql = "SELECT id_user, message, date_add, name  FROM messages, users WHERE messages.id_user = users.id ORDER BY date_add DESC";
+	public function getMessages($rows = 0) {
+		$count = 25;
+		$sql = "SELECT id_user, message, date_add, name  FROM messages, users WHERE messages.id_user = users.id ORDER BY date_add DESC LIMIT $count";
 
 		$res = mysql_query($sql);
 
@@ -23,7 +24,6 @@ class ModelChat {
 		$date_add = date("Y-m-d H:i:s");
 		$user_id = $_SESSION['user_id'];
 		$sql = "INSERT INTO messages (id_user, message, date_add) VALUE ('$user_id', '$message', '$date_add')";
-
 		mysql_query($sql);
 	}
 }

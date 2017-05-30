@@ -22,9 +22,19 @@ class Routers {
 				break;
 			case '/user':
 				if ( isset($_POST['user_action']) ) {
+					
 					require_once('controllerUser.php');
 					$user = new User($_POST);
-					$user->userAction( $_POST['user_action'] );
+					
+					if (is_array($user->register)) {
+						$views = "/views/sign-up.php";
+					}
+
+					if ( isset($user->login) && !$user->login) {
+						$loginError = "Невірні логін або пароль";
+						$views = "/views/sign-in.php";
+					}
+
 				} else {
 					header("Location: /" );
 				}
@@ -45,7 +55,9 @@ class Routers {
 				}
 
 				if ( isset($_POST['massage']) ) {
-					$chat->addMessage( $_POST['massage'] );
+
+					$messageAdd = strip_tags($_POST['massage']);
+					$chat->addMessage( $messageAdd );
 					header("Location: /chat");
 				}
 
