@@ -6,7 +6,7 @@
 	<title>Chat</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="lib/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
