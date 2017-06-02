@@ -21,10 +21,10 @@ class ModelChat {
 		return $this->messages;	
 	}
 
-	public function addMessage($message, $linkFile) {
+	public function addMessage($message, $linkFile, $typeFile) {
 		$date_add = date("Y-m-d H:i:s");
 		$user_id = $_SESSION['user_id'];
-		$sql = "INSERT INTO messages (id_user, message, date_add, attached) VALUE ('$user_id', '$message', '$date_add', '$linkFile')";
+		$sql = "INSERT INTO messages (id_user, message, date_add, attached, type_attached) VALUE ('$user_id', '$message', '$date_add', '$linkFile', '$typeFile')";
 		mysql_query($sql);
 	}
 }

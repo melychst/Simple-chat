@@ -9,11 +9,16 @@ require_once ROOT.'/models/modelChat.php';
 class Chat {
 
 	public $modelChat; 
+	public $fileSize = '300';
+	public $imag_w = '320';
+	public $imag_h = '250';
 	public $linkFile = '';
-
-	public $fileType = array(
-						'text/plain' => 'text', 
-						'image/jpeg' => 'image'
+	public $fileType = '';
+	public $fileTypes = array(
+						'text/plain'	=> 'text', 
+						'image/jpeg'	=> 'image',
+						'image/gif'		=> 'image',
+						'image/png'		=> 'image'
 						);
 
 	public $fileCheck = false;
@@ -28,14 +33,22 @@ class Chat {
 		return $messagesAll;
 	}
 
-	public function addMessage($message, $uploadFile, $uploadFileType, $uploadFileSize ){
+	public function addMessage( $message, $uploadFile ){
+/*
+		echo "<pre>";
+		print_r(getimagesize($uploadFile['tmp_name']));
+		echo "</pre>";
+*/
+		if ( count($uploadFile) != 0 ) {
+			$this->checkUploadFile( $uploadFile );
 
-		if ( count($uploadFile) != 0) {
-			$this->checkUploadFile( $uploadFileType, $uploadFileSize );
-			$this->uploadFile($uploadFile);
+			if ( $this->fileCheck ) {
+				$this->uploadFile( $uploadFile );
+			}
+			
 		} 
 		
-		$this->modelChat->addMessage($message, $this->linkFile);
+		$this->modelChat->addMessage($message, $this->linkFile, $this->fileType );
 	}
 
 	public function uploadFile($uploadFile){
@@ -46,13 +59,40 @@ class Chat {
 		}
 	}
 
-	public checkUploadFile( $uploadFileType, $uploadFileSize ){
+	public function checkUploadFile( $uploadFile ){
 
-		foreach ($this->$fileType as $key => $value) {
-			if ( $key == $uploadFileType ) {
+		foreach ($this->fileTypes as $key => $value) {
 
+			if ( $key == $uploadFile['type'] ) {
+				$this->fileType =  $value;
 			}
 		}
+
+		switch ($this->fileType) {
+			case 'text':
+				if ($uploadFile['size'] > $this->fileSize) {
+					return;
+				}
+				break;
+			case 'image':
+					//echo IMAGETYPE_GIF ." - ". IMAGETYPE_JPEG ." - ". IMAGETYPE_PNG;
+				 	list($uploadImageW, $uploadImageH, $codeType) = getimagesize($uploadFile['tmp_name']); // Получаем размеры и тип изображения (число)
+				    $codeTypes = array("", "gif", "jpeg", "png"); // Массив с типами изображений
+
+				    if ( ($uploadImageW > $this->imag_w ) || ($uploadImageH > $this->imag_h ) ) {
+				    	$funcCrop = 'imagecreatefrom'.$codeTypes[$codeType];
+				    	$imgOrg = $funcCrop($uploadFile['tmp_name']);
+						$imgNew = imagecreatetruecolor($this->imag_w, $this->imag_h); // Создаём дескриптор для выходного изображения
+						imagecopy($imgNew, $imgOrg, 0, 0, 0, 0, $this->imag_w, $this->imag_h); // Переносим часть изображения из исходного в выходное
+						$func = 'image'.$codeTypes[$codeType]; // Получаем функция для сохранения результата	
+						$func($imgNew, $uploadFile['tmp_name']);			    	
+				    }
+				break;				
+			default:
+				return;
+				break;
+		}
+
 
 		$this->fileCheck = true;
 	}	
