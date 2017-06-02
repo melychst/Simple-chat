@@ -57,7 +57,13 @@ class Routers {
 				if ( isset($_POST['massage']) ) {
 
 					$messageAdd = strip_tags($_POST['massage']);
-					$chat->addMessage( $messageAdd );
+					$uploadFile = array();
+
+					if ($_FILES['attached_file']['error'] == 0 ) {
+						$uploadFile = $_FILES['attached_file'];
+					}
+
+					$chat->addMessage( $messageAdd, $uploadFile );
 					header("Location: /chat");
 				}
 
@@ -72,6 +78,7 @@ class Routers {
 				$chat = new Chat();				
 				$chatMessages = $chat->getAllMessages();
 				echo json_encode($chatMessages);
+				die();
 				break;
 
 

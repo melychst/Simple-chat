@@ -9,21 +9,22 @@ class ModelChat {
 
 	public function getMessages($rows = 0) {
 		$count = 25;
-		$sql = "SELECT id_user, message, date_add, name  FROM messages, users WHERE messages.id_user = users.id ORDER BY date_add DESC LIMIT $count";
+		$sql = "SELECT id_user, message, date_add, attached, type_attached, name  FROM messages, users WHERE messages.id_user = users.id ORDER BY date_add DESC LIMIT $count";
 
 		$res = mysql_query($sql);
-
-		while( $row = mysql_fetch_assoc($res) ) {
-			array_push($this->messages, $row);
+		if ( $res ) {
+			while( $row = mysql_fetch_assoc($res) ) {
+				array_push($this->messages, $row);
+			}
 		}
 
 		return $this->messages;	
 	}
 
-	public function addMessage($message) {
+	public function addMessage($message, $linkFile) {
 		$date_add = date("Y-m-d H:i:s");
 		$user_id = $_SESSION['user_id'];
-		$sql = "INSERT INTO messages (id_user, message, date_add) VALUE ('$user_id', '$message', '$date_add')";
+		$sql = "INSERT INTO messages (id_user, message, date_add, attached) VALUE ('$user_id', '$message', '$date_add', '$linkFile')";
 		mysql_query($sql);
 	}
 }

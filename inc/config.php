@@ -6,6 +6,4 @@ define("PASSWORD", "");
 define("HOST", "localhost");
 define("DB", "chat");
 
-
-
 ?>
