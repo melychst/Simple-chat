@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="lib/jquery-3.2.1.min.js"></script>
+	<script src="js/script.js"></script>
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>

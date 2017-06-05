@@ -20,6 +20,7 @@ class Chat {
 						'image/gif'		=> 'image',
 						'image/png'		=> 'image'
 						);
+	public $tags = "<a><code><i><u>";
 
 	public $fileCheck = false;
 
@@ -95,6 +96,13 @@ class Chat {
 
 
 		$this->fileCheck = true;
+	}
+
+
+	public function validateMessage($massage) {
+		$massage = strip_tags($massage, $this->tags);
+
+		return $massage;
 	}	
 }
 

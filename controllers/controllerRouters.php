@@ -56,7 +56,7 @@ class Routers {
 
 				if ( isset($_POST['massage']) ) {
 
-					$messageAdd = strip_tags($_POST['massage']);
+					$messageAdd = $chat->validateMessage($_POST['massage']);
 					$uploadFile = array();
 
 					if ($_FILES['attached_file']['error'] == 0 ) {
