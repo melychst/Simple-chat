@@ -65,6 +65,12 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3>Add message</h3>
+				<div class="insert-tags">
+					<button class="insert-tag" value="code">Code</button>
+					<button class="insert-tag" value="italic">italic</button>
+					<button class="insert-tag" value="strong">strong</button>
+					<button class="insert-tag" value="strike">strike</button>
+				</div>
 				<form method="POST" action="chat" enctype="multipart/form-data">
 					<div class="control-group">
 					    <label class="control-label" for="massage">Message</label>
@@ -87,11 +93,6 @@
 				    </div>
 				  </div>
 				</form>
-				<div class="insert-tags">
-					<button class="insert-tags" value="code" onclick="getCursorPosition( document.getElementById('massage') )">Code</button>
-					<button class="insert-tags" value="i" value="i" >i</button>
-					<button class="insert-tag" value="u" value="u" >u</button>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -106,11 +107,20 @@
 
 
 $(document).ready(function(){
- 			
+var tags = {
+		'code':"<code></code>",
+		"italic":"<i></i>",
+		"strong":"<strong></strong>",
+		"strike":"<strike></strike>"
+		};
+
 $(".insert-tag").click(function(){
 
-    var ctrl = $("#massage");
+	var index = $(this).val(); 
 
+	var insertText = tags[index];
+	var text = $("#massage").val();
+    var ctrl = document.getElementById("massage");
 
             var CaretPos = 0;
             if ( document.selection ) {
@@ -121,27 +131,13 @@ $(".insert-tag").click(function(){
             } else if ( ctrl.selectionStart || ctrl.selectionStart == '0' ) {
                 CaretPos = ctrl.selectionStart;
             }
-            alert (CaretPos+" www");
-            return CaretPos;
- 
 
+            var startText = text.substring(0, CaretPos);
+            var endText = text.substring(CaretPos);
+
+	        $("#massage").val(startText + insertText + endText);
     })
 
 });
-            
-            function getCursorPosition( ctrl ) {
-            var CaretPos = 0;
-            if ( document.selection ) {
-                ctrl.focus ();
-                var Sel = document.selection.createRange();
-                Sel.moveStart ('character', -ctrl.value.length);
-                CaretPos = Sel.text.length;
-            } else if ( ctrl.selectionStart || ctrl.selectionStart == '0' ) {
-                CaretPos = ctrl.selectionStart;
-            }
-            alert (CaretPos+" vvv");
-            return CaretPos;
-        }
-
  
 </script>

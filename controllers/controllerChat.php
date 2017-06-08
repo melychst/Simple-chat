@@ -20,7 +20,7 @@ class Chat {
 						'image/gif'		=> 'image',
 						'image/png'		=> 'image'
 						);
-	public $tags = "<a><code><i><u>";
+	public $tags = "<a><code><i><strike><strong>";
 
 	public $fileCheck = false;
 
