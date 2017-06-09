@@ -9,7 +9,7 @@ require_once ROOT.'/models/modelChat.php';
 class Chat {
 
 	public $modelChat; 
-	public $fileSize = '300';
+	public $fileSize = '300000';
 	public $imag_w = '320';
 	public $imag_h = '250';
 	public $linkFile = '';
@@ -35,11 +35,7 @@ class Chat {
 	}
 
 	public function addMessage( $message, $uploadFile ){
-/*
-		echo "<pre>";
-		print_r(getimagesize($uploadFile['tmp_name']));
-		echo "</pre>";
-*/
+
 		if ( count($uploadFile) != 0 ) {
 			$this->checkUploadFile( $uploadFile );
 

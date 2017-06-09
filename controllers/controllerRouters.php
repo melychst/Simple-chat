@@ -48,7 +48,7 @@ class Routers {
 			case '/chat':
 				require_once('controllerChat.php');
 				$chat = new Chat();
-				
+				ob_start();
 				if ( !isset($_SESSION['user_name']) ) {
 					header("Location: /");
 					die();
@@ -64,7 +64,7 @@ class Routers {
 					}
 
 					$chat->addMessage( $messageAdd, $uploadFile );
-					header("Location: /chat");
+					//header("Location: /chat");
 				}
 
 				$chatMessages = $chat->getAllMessages();

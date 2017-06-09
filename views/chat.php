@@ -71,7 +71,7 @@
 					<button class="insert-tag" value="strong">strong</button>
 					<button class="insert-tag" value="strike">strike</button>
 				</div>
-				<form method="POST" action="chat" enctype="multipart/form-data">
+				<form method="POST" action="addMessage" enctype="multipart/form-data" id="addMessage">
 					<div class="control-group">
 					    <label class="control-label" for="massage">Message</label>
 					    <div class="controls">
@@ -101,6 +101,9 @@
 
 <div id="popup-text" class="close-popup"><div class="popup-text"></div></div>
 <div id="popup-image" class="close-popup"><div class="popup-image"></div></div>
+
+
+
 
 
 <script type="text/javascript" charset="utf-8">
@@ -138,6 +141,32 @@ $(".insert-tag").click(function(){
 	        $("#massage").val(startText + insertText + endText);
     })
 
-});
+
+$("#addMessage").submit(function(event) {
+	event.preventDefault();
+    var formData = new FormData(this);
+	
+		$.ajax({
+			url: '/chat',
+			type: 'POST',
+			contentType: false,
+      		processData: false,		
+		    data: formData,
+		})
+		.done(function() {
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+	});	 
+
+});;
+
+
  
 </script>

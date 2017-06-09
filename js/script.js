@@ -1,15 +1,11 @@
 (function($) {
-	'use_strict';
-
+	'use strict';
 
     $(document).ready(function(){
-
-        WaitForMsg();
-       
-         function WaitForMsg(){
-
+        
+        setTimeout(function WaitForMsg(){
+            
             $.ajax({
-          
                 type: 'POST',
                 url: '/chatajax',
                 async: true,
@@ -32,7 +28,7 @@
                                 }
                                 fileLink = "<a id='link' class='"+class_link+"' href='"+messages[i]['attached']+"'>File for review</a>";
                             } else {
-                                fileLink = 'File is no ggg';
+                                fileLink = 'File is no';
                             }
 
                             table += "<tr>"+
@@ -59,10 +55,8 @@
                                 })
                                 .done(function(data) {
                                     $("#popup-text .popup-text").html(data);
-                                    console.log("success");
                                 })
                                 .fail(function() {
-                                    console.log("error");
                                 });     
                             $("#popup-text").css({
                                 display: 'block'
@@ -72,22 +66,19 @@
                     $("#table").on("click", ".popup-link-img", function (e) {
                             e.preventDefault();
                             $("#popup-image .popup-image").html("<img src='"+$(this).attr('href')+"'>");
-                                        
                             $("#popup-image").css({
                                 display: 'block'
                             }).fadeIn('4000');
                     });                 
-                
-                    setTimeout(WaitForMsg(), 5000);
-                    
+                    setTimeout(WaitForMsg, 1000);
                 },
                 
                 error: function(XMLHttpRequest, textStatus, errorThrown){
-                    setTimeout(WaitForMsg(),1000);
+                    console.log("ERROR");
                 }
                 
             });
-        } 
+        }, 1000); 
 
 
     });
