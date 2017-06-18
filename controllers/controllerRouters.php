@@ -22,11 +22,11 @@ class Routers {
 				break;
 			case '/user':
 				if ( isset($_POST['user_action']) ) {
-					
+					//print_r($_POST);
 					require_once('controllerUser.php');
 					$user = new User($_POST);
 					
-					if (is_array($user->register)) {
+					if ( is_array($user->register) ) {
 						$views = "/views/sign-up.php";
 					}
 
@@ -67,7 +67,7 @@ class Routers {
 					//header("Location: /chat");
 				}
 
-				$chatMessages = $chat->getAllMessages();
+				$chatMessages = $chat->getAllMessages($chat->countMessages);
 
 				$views = "/views/chat.php";
 
@@ -75,8 +75,12 @@ class Routers {
 			
 			case '/chatajax':
 				require_once('controllerChat.php');
-				$chat = new Chat();				
-				$chatMessages = $chat->getAllMessages();
+				$chat = new Chat();
+
+				if ( isset($_POST['count']) ){
+					$countPost = $_POST['count'];
+				} 
+				$chatMessages = $chat->getAllMessages($countPost);
 				echo json_encode($chatMessages);
 				die();
 				break;

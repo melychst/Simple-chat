@@ -15,9 +15,6 @@ class Config
 		}
 		
 		mysql_select_db(DB, $db);
-
-
-
 	}
 }
 ?>

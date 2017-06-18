@@ -7,7 +7,8 @@
 require_once ROOT.'/models/modelChat.php';
 
 class Chat {
-
+	public $countMessages = 5;
+	public $limitMessges = 5;
 	public $modelChat; 
 	public $fileSize = '300000';
 	public $imag_w = '320';
@@ -28,9 +29,9 @@ class Chat {
 		$this->modelChat = new ModelChat();
 	}
 
-	public function getAllMessages() {
+	public function getAllMessages($count) {
 
-		$messagesAll = $this->modelChat->getMessages();
+		$messagesAll = $this->modelChat->getMessages($count);
 		return $messagesAll;
 	}
 
@@ -73,15 +74,15 @@ class Chat {
 				break;
 			case 'image':
 					//echo IMAGETYPE_GIF ." - ". IMAGETYPE_JPEG ." - ". IMAGETYPE_PNG;
-				 	list($uploadImageW, $uploadImageH, $codeType) = getimagesize($uploadFile['tmp_name']); // Получаем размеры и тип изображения (число)
-				    $codeTypes = array("", "gif", "jpeg", "png"); // Массив с типами изображений
+				 	list($uploadImageW, $uploadImageH, $codeType) = getimagesize($uploadFile['tmp_name']); 
+				    $codeTypes = array("", "gif", "jpeg", "png");
 
 				    if ( ($uploadImageW > $this->imag_w ) || ($uploadImageH > $this->imag_h ) ) {
 				    	$funcCrop = 'imagecreatefrom'.$codeTypes[$codeType];
 				    	$imgOrg = $funcCrop($uploadFile['tmp_name']);
-						$imgNew = imagecreatetruecolor($this->imag_w, $this->imag_h); // Создаём дескриптор для выходного изображения
-						imagecopy($imgNew, $imgOrg, 0, 0, 0, 0, $this->imag_w, $this->imag_h); // Переносим часть изображения из исходного в выходное
-						$func = 'image'.$codeTypes[$codeType]; // Получаем функция для сохранения результата	
+						$imgNew = imagecreatetruecolor($this->imag_w, $this->imag_h); 
+						imagecopy($imgNew, $imgOrg, 0, 0, 0, 0, $this->imag_w, $this->imag_h); 
+						$func = 'image'.$codeTypes[$codeType]; 
 						$func($imgNew, $uploadFile['tmp_name']);			    	
 				    }
 				break;				

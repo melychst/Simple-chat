@@ -1,101 +1,91 @@
 <div class="main-chat">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<h1>Messages</h1>
-				<div id="chat-messages">
-					<table id="table" data-count="25">
-						<thead>
-							<tr>
-								<td>№</td>
-								<td>Author</td>
-								<td>Message</td>
-								<td>Attached</td>
-								<td>Date, time</td>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								if ( is_array($chatMessages) ) {
-									$i = 1;
-									foreach ($chatMessages as $key => $message) {
-							?>
-							<tr>
-								<td><?php echo $i; ?></td>
-								<td><?php echo $message['name'] ?></td>
-								<td><?php echo$message['message'] ?></td>
-								<td>
-								<?php 
-								if ($message['attached'] != '') {
-										if ($message['type_attached'] == 'text') {
-												$class = "popup-link-text";
-										} else {
-												$class = "popup-link-img";
-										}
-								?>
-									<a class="<?php echo $class; ?>" href="<?php echo $message['attached']; ?>">File for review</a>
-								<?php 
-								}else {
-								?>
-								
-								File is no
-
-								<?php	
-								}
-								?>
-									
-								</td>
-								<td><?php echo$message['date_add'] ?></td>
-							</tr>
-							<?php
-								$i++;
+				<div class="chat-messages-wrap">
+					<div id="chat-messages" data-count="<?php echo $chat->countMessages; ?>" data-limit="<?php echo $chat->limitMessges;?>">
+					<?php
+						if ( is_array($chatMessages) ) {
+							$i = 1;
+							foreach ($chatMessages as $key => $message) {
+					?>
+						<div class="wrap-message">
+							<div class="author-info">
+								<div class="name">
+									<?php echo $message['name'] ?>
+								</div>
+								<div class="info">
+									<?php echo $_SERVER["REMOTE_ADDR"]; ?>
+								</div>
+							</div>
+							<div class="message-block">
+								<div class="message-header">
+									<?php echo$message['date_add'] ?>
+								</div>
+								<div class="message-body">
+									<?php echo$message['message'] ?>
+								</div>
+								<div class="message-footer">
+									<?php 
+									if ($message['attached'] != '') {
+											if ($message['type_attached'] == 'text') {
+													$class = "popup-link-text";
+											} else {
+													$class = "popup-link-img";
+											}
+									?>
+										<a class="<?php echo $class; ?>" href="<?php echo $message['attached']; ?>">File for review</a>
+									<?php 
 									}
-								}
-
-							?>
-						</tbody>
-					</table>
+									?>								
+								</div>
+							</div>
+						</div>
+					<?php
+							}
+						}
+					?>
+					</div>					
 				</div>
+
+			</div>
+			<div class="col-md-4">
+				<div id="add-messages">
+					<h3>Add message</h3>
+					<div class="insert-tags">
+						<button class="insert-tag" value="code">Code</button>
+						<button class="insert-tag" value="italic">italic</button>
+						<button class="insert-tag" value="strong">strong</button>
+						<button class="insert-tag" value="strike">strike</button>
+					</div>
+					<form method="POST" action="addMessage" enctype="multipart/form-data" id="addMessage">
+						<div class="control-group">
+						    <div class="controls">
+						      <textarea id="massage" placeholder="" name="massage" cols="30" rows="10"></textarea>
+						    </div>
+						</div>
+						<div class="control-group">					
+						  	<div class="controls">
+						      <input type="file" id="attached_file" placeholder="" name="attached_file" >
+						    </div>
+					  </div>
+					  <div class="control-group">
+						<div id="recaptcha" class="g-recaptcha" data-sitekey="<?php echo CAPTCHA; ?>"></div>
+					  </div>			  
+					  <div class="control-group">
+					    <div class="controls">
+					      	<button id="submit-message" type="submit" class="btn">Send message</button>
+					    </div>
+					  </div>
+					</form>
+					<div class="msgError">Заповніть будь ласка усі поля</div>
+				</div>				
 			</div>
 		</div>
 	</div>
 </div>
 <div class="add-messages">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h3>Add message</h3>
-				<div class="insert-tags">
-					<button class="insert-tag" value="code">Code</button>
-					<button class="insert-tag" value="italic">italic</button>
-					<button class="insert-tag" value="strong">strong</button>
-					<button class="insert-tag" value="strike">strike</button>
-				</div>
-				<form method="POST" action="addMessage" enctype="multipart/form-data" id="addMessage">
-					<div class="control-group">
-					    <label class="control-label" for="massage">Message</label>
-					    <div class="controls">
-					      <textarea id="massage" placeholder="" name="massage" required cols="30" rows="10"></textarea>
-					    </div>
-					</div>
-					<div class="control-group">
-					    <label class="control-label" for="attached_file">Upload file</label>					
-					  	<div class="controls">
-					      <input type="file" id="attached_file" placeholder="" name="attached_file" >
-					    </div>
-				  </div>
-				  <div class="control-group">
-					<div class="g-recaptcha" data-sitekey="6LexByMUAAAAABaVA4KhuU_HvuMu6fdrD2xfkiTd"></div>
-				  </div>			  
-				  <div class="control-group">
-				    <div class="controls">
-				      	<button type="submit" class="btn">Send message</button>
-				    </div>
-				  </div>
-				</form>
-			</div>
-		</div>
-	</div>
 </div>
 <div id="content"></div>
 
@@ -139,9 +129,9 @@ $(".insert-tag").click(function(){
             var endText = text.substring(CaretPos);
 
 	        $("#massage").val(startText + insertText + endText);
-    })
+    });
 
-
+/*
 $("#addMessage").submit(function(event) {
 	event.preventDefault();
     var formData = new FormData(this);
@@ -154,19 +144,16 @@ $("#addMessage").submit(function(event) {
 		    data: formData,
 		})
 		.done(function() {
-			console.log("success");
+			$("#massage").val('');
 		})
 		.fail(function() {
-			console.log("error");
 		})
 		.always(function() {
-			console.log("complete");
 		});
 
 	});	 
+*/
 
-});;
 
-
- 
+});
 </script>

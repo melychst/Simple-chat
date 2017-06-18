@@ -1,5 +1,5 @@
 <?php
-
+require_once ROOT.'/recaptchalib.php';
 /**
 * Validation
 */
@@ -8,7 +8,7 @@ class Validation{
 	public $errors = array();
 	public $register;
 
-	function __construct($name, $email, $pass, $pass_conf){
+	function __construct($name, $email, $pass, $pass_conf, $reCaptcha){
 /*
 		echo $name."<br>";
 		echo $email."<br>";
@@ -23,6 +23,8 @@ class Validation{
 		$this->maskEmail($email);
 
 		$this->passValid($pass, $pass_conf);
+
+		$this->reCaptcha($reCaptcha);
 
 		if ( count($this->errors) > 0 ) {
 			return $this->errors;
@@ -53,6 +55,18 @@ class Validation{
 			//array_push($this->errors, "Паролі не співпадають");
 		}
 	}
+
+	public function reCaptcha($captha) {
+			$reCaptcha = new ReCaptcha(CAPTCA_SECRET);	
+			$response = $reCaptcha->verifyResponse(
+					    $_SERVER["REMOTE_ADDR"],
+					    $captha
+					);
+			if ($response != null && $response->success) {
+				return;
+			}
+		$this->errors['reCaptcha'] = "Помилка каптчі";	
+	}		
 }
 
 ?>

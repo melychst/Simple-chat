@@ -1,0 +1,117 @@
+'BJ': ["CARO", "Benin", "1,834,467"],
+'BI': ["CARO", "Burundi", "359,778"],
+'CM': ["CARO", "Cameroon", "1,000,179"],
+'CF': ["CARO", "Central African Republic", "297,060"],
+'TD': ["CARO", "Chad", "221,248"],
+'CD': ["CARO", "Democratic Republic of Congo", "2,602,402"],
+'NG': ["CARO", "Nigeria", "5,346,196"],
+'CG': ["CARO", "Republic of Congo", "outreach country"],
+'RW': ["CARO", "Rwanda", "373,729"],
+'TG': ["CARO", "Togo", "1,060,644"],
+
+'DJ': ["EARO", "Djibouti", "outreach country"],
+'ER': ["EARO", "Eritrea", "outreach country"],
+'ET': ["EARO",	"Ethiopia", "6,948,367"],
+'SO': ["EARO",	"Somalia", "935,595"],
+'SS': ["EARO",	"South Sudan", "2,179,972"],
+'SD': ["EARO",	"Sudan", "1,118,954"],
+'TZ': ["EARO",	"Tanzania", "837,310"],
+'UG': ["EARO",	"Uganda", "1,100,830"],
+'KE': ["EARO",	"Kenya", "2,663,672"],
+
+
+'AF': ["EMECA",	"Afghanistan", "87,586"],
+'AL': ["EMECA",	"Albania", "7,507"],
+'AM': ["EMECA", "Armenia", "outreach country"],
+'AT': ["EMECA", "Austrai", "outreach country"],
+'AZ': ["EMECA", "Azerbijan", "outreach country"],
+'BY': ["EMECA", "Belarus", "outreach country"],
+'BA': ["EMECA",	"Bosnia and Herzegovina",	"613,271"],
+'BG': ["EMECA", "Bulgaria", "outreach country"],
+'HR': ["EMECA",	"Croatia", "984"],
+'CY': ["EMECA", "Cyprus", "outreach country"],
+'EG': ["EMECA",	"Egypt", "91,543"],
+'GE': ["EMECA", "Georgia", "outreach country"],
+'DE': ["EMECA", "Germany", "outreach country"],
+'GR': ["EMECA",	"Greece", "14,808"],
+'IQ': ["EMECA",	"Iraq", "118,910"],
+'JO': ["EMECA",	"Jordan",	15,	"77,510"],
+'IL': ["EMECA", "JWBG", 14, "104,394"],
+'PS': ["EMECA", "JWBG", 14, "104,394"],
+'KZ': ["EMECA", "Kazakhstan", "outreach country"],
+
+'KZ': ["EMECA", "Kosovo", "outreach country"],
+
+'KG': ["EMECA", "Kyrgyzstan", "outreach country"],
+'LB': ["EMECA",	"Lebanon", "211,450"],
+'MK': ["EMECA",	"Macedonia", "27,496"],
+'MD': ["EMECA", "Moldova", "outreach country"],
+'ME': ["EMECA",	"Montenegro", "outreach country"],
+'NO': ["EMECA",	"Norway", "outreach country"],
+'PK': ["EMECA",	"Pakistan", "585,199"],
+'RU': ["EMECA",	"Russia", "outreach country"],
+'RS': ["EMECA",	"Serbia", "23,932"],
+'SI': ["EMECA",	"Slovenia", "outreach country"],
+'TJ': ["EMECA",	"Tajikistan", "outreach country"],
+'TN': ["EMECA",	"Tunisia", "outreach country"],
+'TR': ["EMECA",	"Turkey", "608,083"],
+'TM': ["EMECA",	"Turkmenistan", "outreach country"],
+'UA': ["EMECA",	"Ukraine", "44,366"],
+'UZ': ["EMECA",	"Uzbekistan", "outreach country"],
+'YE': ["EMECA",	"Yemen", "outreach country"],
+
+ESA	Bangladesh	47343
+ESA	Cambodia	3 153 028
+ESA	China 	outreach country 
+ESA	India	1001525
+ESA	Indonesia	13134
+ESA	Japan	outreach country 
+ESA	Laos	121 002
+ESA	Mongolia	outreach country 
+ESA	Myanmar	110 363
+ESA	Nepal	168 301
+ESA	North Korea	outreach country 
+ESA	Oceania	outreach country 
+ESA	Philippines	1 256 075
+ESA	Sri Lanka	13 949
+ESA	East Timor [aka Timor-Leste] 	140 566
+ESA	Thailand	outreach country 
+ESA	Vietnam	784210
+LACRO	Bolivia	13 868
+LACRO	Brazil	119 838
+LACRO	Chile	outreach country 
+LACRO	Colombia	14 913
+LACRO	Cuba 	outreach country 
+LACRO	Dominican Republic	3 845
+LACRO	Ecuador	53 967
+LACRO	El Salvador	20 685
+LACRO	Grenada	outreach country 
+LACRO	Guatemala	483507
+LACRO	Haiti	971253
+LACRO	Honduras	247 891
+LACRO	Jamaica	outreach country 
+LACRO	Mexico	23 647
+LACRO	Nicaragua	77 424
+LACRO	Peru	7 778
+LACRO	Saint Lucia	outreach country 
+SARO	Angola	3223804
+SARO	Botswana	11 210
+SARO	Lesotho	176 683
+SARO	Madagascar	1 735 440
+SARO	Malawi	3524686
+SARO	Namibia	outreach country 
+SARO	Swaziland	outreach country 
+SARO	Zambia	1655369
+SARO	Zimbabwe	85 435
+WARO	Burkina Faso	1970654
+WARO	The Gambia	3 014 418
+WARO	Ghana	116 343
+WARO	Guinea - Bissau	3 600
+WARO	Guinea - Conakry	12 264 571
+WARO	Ivory Coast	outreach country 
+WARO	Liberia	576812
+WARO	Mali	8705528
+WARO	Mauritania	77 179
+WARO	Niger	28 225 263
+WARO	Senegal	4351022
+WARO	Sierra Leone	10763535

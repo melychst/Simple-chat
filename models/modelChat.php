@@ -7,8 +7,8 @@
 class ModelChat {
 	public $messages = array();
 
-	public function getMessages($rows = 0) {
-		$count = 25;
+	public function getMessages($count) {
+
 		$sql = "SELECT id_user, message, date_add, attached, type_attached, name  FROM messages, users WHERE messages.id_user = users.id ORDER BY date_add DESC LIMIT $count";
 
 		$res = mysql_query($sql);

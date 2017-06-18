@@ -16,6 +16,7 @@ class User {
 	public $modelUser;
 	public $register;
 	public $login;
+	public $reCaptha;
 
 	function __construct($userData){
 		//print_r($userData);
@@ -30,6 +31,11 @@ class User {
 			$this->pass_conf = $userData['pass_conf'];
 		}
 
+		if ( isset($userData['g-recaptcha-response']) ) {
+			$this->reCaptha = $userData['g-recaptcha-response'];
+		}
+		
+
 		$this->modelUser = new ModelUser();
 
 		$this->register = $this->userAction($userData['user_action']);
@@ -43,8 +49,16 @@ class User {
 
 		switch ($action) {
 			case 'register':
-				$validation = new Validation($this->name, $this->email, $this->pass, $this->pass_conf);
+				$validation = new Validation($this->name, $this->email, $this->pass, $this->pass_conf, $this->reCaptha);
+
 				if ( $validation->register == 'true' ) {
+
+					$chackUser = $this->modelUser->getUser($this->name);
+
+					if ( $chackUser ) {
+						return $this->register = array('error' => "Такий користувач уже існує", );
+					}
+
 					$this->userRigister();
 				} else {
 					return $validation->errors;
@@ -78,8 +92,10 @@ class User {
 	public function userRigister() {
 
 		$this->pass = password_hash($this->pass, PASSWORD_DEFAULT);
-		$res = $this->modelUser->insertUser($this->name, $this->email, $this->pass);
+		$userIp = $_SERVER["REMOTE_ADDR"];
+		$userBrawser = $_SERVER["HTTP_USER_AGENT"];
 
+		$res = $this->modelUser->insertUser($this->name, $this->email, $this->pass, $userIp, $userBrawser);
 
 		$_SESSION['user_name'] = $this->name;
 		$_SESSION['user_id'] = $this->modelUser->userId;
