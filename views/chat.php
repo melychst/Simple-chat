@@ -15,9 +15,6 @@
 								<div class="name">
 									<?php echo $message['name'] ?>
 								</div>
-								<div class="info">
-									<?php echo $_SERVER["REMOTE_ADDR"]; ?>
-								</div>
 							</div>
 							<div class="message-block">
 								<div class="message-header">
@@ -26,20 +23,22 @@
 								<div class="message-body">
 									<?php echo$message['message'] ?>
 								</div>
-								<div class="message-footer">
-									<?php 
-									if ($message['attached'] != '') {
-											if ($message['type_attached'] == 'text') {
-													$class = "popup-link-text";
-											} else {
-													$class = "popup-link-img";
-											}
-									?>
-										<a class="<?php echo $class; ?>" href="<?php echo $message['attached']; ?>">File for review</a>
-									<?php 
+								
+								<?php 
+								if ($message['attached'] != '') {
+									if ($message['type_attached'] == 'text') {
+											$class = "popup-link-text";
+									} else {
+											$class = "popup-link-img";
 									}
-									?>								
-								</div>
+								?>
+								<div class="message-footer">
+
+									<a class="<?php echo $class; ?>" href="<?php echo $message['attached']; ?>">File for review</a>
+								</div>									
+								<?php 
+								}
+								?>								
 							</div>
 						</div>
 					<?php
@@ -89,8 +88,13 @@
 </div>
 <div id="content"></div>
 
-<div id="popup-text" class="close-popup"><div class="popup-text"></div></div>
-<div id="popup-image" class="close-popup"><div class="popup-image"></div></div>
+
+<div id="popup" class="close-popup">
+	<div class="popup-text"></div>
+	<div class="popup-image"></div>
+	<canvas id="pixie"></canvas>
+</div>
+
 
 
 

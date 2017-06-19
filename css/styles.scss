@@ -196,7 +196,7 @@ h3 {
 	}
 }
 
-#popup-text, #popup-image{
+#popup{
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -213,6 +213,8 @@ h3 {
 		top:10%;
 		overflow: scroll;
 		padding: 25px;
+		display: none;
+		z-index: 3;
 	}
 
 	.popup-image {
@@ -222,17 +224,22 @@ h3 {
 		margin: 0 auto;
 		position: relative;
 		top:10%;
-		display: inline-block;
+		display: none;
+		z-index: 2;
 	}
 }
-#popup-image {
+#popup {
 	text-align: center;
 }
 
 .msgError {
 	display: none;
 }
-
+#pixie {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
 
 @media (max-width: 480px) {
 	#add-messages {

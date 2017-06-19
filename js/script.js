@@ -3,7 +3,7 @@
 
     $(document).ready(function(){
  
-    var timerId = setTimeout(WaitForMsg, 5000, 0);
+    var timerId = setTimeout(WaitForMsg, 1000, 0);
 
     function WaitForMsg(countParam){
        var count;
@@ -24,11 +24,15 @@
             async: true,
             cache: false,
             success: function(response){
-                    console.log(timerId);
                     clearTimeout(timerId);
                     var messages = $.parseJSON(response);
+                    if (messages.length < count ) {
+                      var newCount = count;
+                    } else {
+                      var newCount = messages.length;
+                    }
 
-                    var messagesBox = "<div id='chat-messages' data-count='"+messages.length+"' data-limit='"+limit+"'>";
+                    var messagesBox = "<div id='chat-messages' data-count='"+newCount+"' data-limit='"+limit+"'>";
                     var i = 0;
                     
                     messages.forEach (function(){
@@ -78,24 +82,37 @@
                                     data: {param1: 'value1'},
                                 })
                                 .done(function(data) {
-                                    $("#popup-text .popup-text").html(data);
+                                    $("#popup .popup-text").html(data);
                                 })
                                 .fail(function() {
                                 });     
-                            $("#popup-text").css({
+                            $("#popup").css({
                                 display: 'block'
-                            }).fadeIn('4000');                      
+                            });
+                            $("#popup .popup-text").css({
+                                display: 'block'
+                            });
+                            $("#popup .popup-image").css({
+                                display: 'none'
+                            }); 
+
                     });
 
                     $("#chat-messages").on("click", ".popup-link-img", function (e) {
                             e.preventDefault();
-                            $("#popup-image .popup-image").html("<img src='"+$(this).attr('href')+"'>");
-                            $("#popup-image").css({
+                            $("#popup .popup-image").html("<img src='"+$(this).attr('href')+"'>");
+                            $("#popup").css({
                                 display: 'block'
-                            }).fadeIn('4000');
+                            });
+                            $("#popup .popup-image").css({
+                                display: 'inline-block'
+                            });
+                            $("#popup .popup-text").css({
+                                display: 'none'
+                            });
                     });
 
-                    var newCount = $("#chat-messages").attr("data-count");                 
+                    //var newCount = $("#chat-messages").attr("data-count");                 
                     timerId = setTimeout(WaitForMsg, 1000, newCount);
             },
             
